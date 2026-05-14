@@ -1,12 +1,3 @@
-from datetime import datetime
-
-def validar_horario(horario):
-    try:
-        datetime.strptime(horario, "%H:%M")
-        return True
-    except ValueError:
-        return False
-
 historico_cursos = []
 historico_materias = []
 historico_horarios = []
@@ -40,24 +31,14 @@ while True:
 
                     print(f"{materia} adicionada!")
 
-                    # Horário de início
-                    while True:
-                        comeco_aula = input(f"Horário de início de {materia} (HH:MM): ").strip()
-                        if validar_horario(comeco_aula):
-                            break
-                        print("Horário inválido! Use HH:MM")
-
-                    # Horário de término
-                    while True:
-                        fim_aula = input(f"Horário de término de {materia} (HH:MM): ").strip()
-                        if validar_horario(fim_aula):
-                            break
-                        print("Horário inválido! Use HH:MM")
+                    # Horário de início e Horário de término
+                    comeco_aula = input(f"Horário de início de {materia} (HH:MM): ")
+                    fim_aula = input(f"Horário de término de {materia} (HH:MM): ")
 
                     # Dia da semana
                     dias_validos = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado","Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"]
                     while True:
-                        dia = input(f"Em qual dia da semana você tem {materia}? ").strip().capitalize()
+                        dia = input(f"Em qual dia da semana você tem {materia}? ")
                         if dia in dias_validos:
                             break
                         print("Dia inválido! Use: Segunda, Terça, Quarta, Quinta, Sexta, Sábado ou Domingo")
@@ -66,22 +47,22 @@ while True:
                     horarios_materias.append(f"{comeco_aula} até {fim_aula}")
                     dias_materias.append(dia)
 
-                    mais_materias = input("\nDeseja adicionar mais matérias? (Sim/Não): ").strip().lower()
-                    if mais_materias not in ["sim", "s"]:
+                    mais_materias = input("\nDeseja adicionar mais matérias? (Sim/Não): ")
+                    if mais_materias not in ["sim", "s", "Sim"]:
                         break
 
                 # Resumo do curso
-                print("\n" + "=" * 50)
+                print("===============================")
                 print("RESUMO DA CONFIGURAÇÃO")
-                print("=" * 50)
+                print("===============================")
                 print(f"Curso: {curso}")
                 for i in range(len(nomes_materias)):
                     print(f"\n  Matéria: {nomes_materias[i]}")
                     print(f"  Horário: {horarios_materias[i]}")
                     print(f"  Dia:     {dias_materias[i]}")
 
-                confirmacao = input("\nAs informações estão corretas? (Sim/Não): ").strip().lower()
-                if confirmacao in ["sim", "s"]:
+                confirmacao = input("\nAs informações estão corretas? (Sim/Não): ")
+                if confirmacao in ["sim", "s", "Sim"]:
                     historico_cursos.append(curso)
                     historico_materias.append(nomes_materias)
                     historico_horarios.append(horarios_materias)
@@ -91,14 +72,14 @@ while True:
                     print("\nReiniciando configuração...")
                     continue
 
-                mais_cursos = input("\nDeseja configurar outro curso? (Sim/Não): ").strip().lower()
-                if mais_cursos not in ["sim", "s"]:
+                mais_cursos = input("\nDeseja configurar outro curso? (Sim/Não): ")
+                if mais_cursos not in ["sim", "s", "Sim"]:
                     break
 
             # Resumo total
-            print("\n" + "=" * 60)
+            print("===============================")
             print("RESUMO TOTAL DAS CONFIGURAÇÕES")
-            print("=" * 60)
+            print("===============================")
             if not historico_cursos:
                 print("Nenhum curso configurado.")
             else:
@@ -109,8 +90,8 @@ while True:
                         print(f"  Horário: {historico_horarios[i][j]}")
                         print(f"  Dia:     {historico_dias[i][j]}")
 
-            quer_testar = input("\nDeseja testar o Modo Aula? (Sim/Não): ").strip().lower()
-            if quer_testar in ["sim", "s"]:
+            quer_testar = input("\nDeseja testar o Modo Aula? (Sim/Não): ")
+            if quer_testar in ["sim", "s", "Sim"]:
                 while True:
                     print("==============================")
                     print("MENU MODO AULA")
@@ -119,7 +100,7 @@ while True:
                     print("2 - Documento")
                     print("3 - Gravar Áudio")
                     print("4 - Sair")
-                    escolha = input("\nEscolha uma opção: ").strip()
+                    escolha = input("\nEscolha uma opção: ")
                     match escolha:
                         case "1":
                             print("\nVocê está no modo câmera otimizado para aula!")
